@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Hosting - Loading</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #111111;
+            --secondary-bg: #1a1a1a;
+            --text-color: #ffffff;
+            --accent-color: #2196F3;
+            --accent-color-dark: #1976D2;
+            --gray-light: #999999;
+            --gray-dark: #222222;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --green: #4CAF50;
+            --red: #F44336;
+            --yellow: #FFC107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            text-align: center;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: var(--gray-light);
+            position: relative;
+        }
+        
+        .loading-text::after {
+            content: "...";
+            position: absolute;
+            animation: dots 1.5s infinite;
+            width: 24px;
+            text-align: left;
+        }
+        
+        /* Error Popup */
+        .error-popup {
+            position: absolute;
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            max-width: 90%;
+            width: 450px;
+            text-align: center;
+            transform: scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .error-popup.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .error-icon {
+            font-size: 50px;
+            color: var(--red);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .error-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .error-message {
+            color: var(--gray-light);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .error-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gray-light);
+            color: var(--text-color);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Background grid effect */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(transparent 90%, rgba(255, 255, 255, 0.05) 10%),
+                linear-gradient(90deg, transparent 90%, rgba(255, 255, 255, 0.05) 10%);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 500px) {
+            .error-buttons {
+                flex-direction: column;
+            }
+            
+            .error-popup {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <div class="loading-container" id="loadingContainer">
+        <div class="logo">
+            <i class="fas fa-cubes"></i> Next<span>Hosting</span>
+        </div>
+        <div class="spinner"></div>
+        <div class="loading-text">Connecting to your dashboard</div>
+    </div>
+    
+    <div class="error-popup" id="errorPopup">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <h3 class="error-title">Connection Failed</h3>
+        <p class="error-message">
+            We couldn't connect you to your free hosting dashboard at this time. 
+            This could be due to scheduled maintenance or service disruption.
+        </p>
+        <div class="error-buttons">
+            <button class="btn btn-primary" onclick="window.location.href='statuspage.html'">
+                <i class="fas fa-signal"></i> Check System Status
+            </button>
+            <button class="btn btn-whatsapp" onclick="contactFounder()">
+                <i class="fab fa-whatsapp"></i> Contact Support
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Show error popup after 8 seconds
+        setTimeout(function() {
+            document.getElementById('loadingContainer').style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById('loadingContainer').style.display = 'none';
+                document.getElementById('errorPopup').classList.add('active');
+            }, 500);
+        }, 8000);
+        
+        // Function to contact founder via WhatsApp
+        function contactFounder() {
+            // Replace with actual WhatsApp contact link or number
+            window.open('https://wa.me/27683866094?text=Hi,%20I%20am%20having%20issues%20connecting%20to%20my%20NextHosting%20dashboard.', '_blank');
+        }
+    </script>
+</body>
+</html>
