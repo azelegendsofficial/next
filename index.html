@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Hosting - Coming Soon</title>
+    <title>Next Hosting - Premium Minecraft Server Hosting</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -32,8 +32,7 @@
             background: var(--primary-bg);
             color: var(--text-color);
             overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
+            line-height: 1.6;
         }
 
         /* Animated Background */
@@ -114,66 +113,128 @@
             }
         }
 
-        /* Main container */
-        .container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            position: relative;
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(0px);
         }
 
-        /* Logo */
-        .logo {
-            font-size: 3.5rem;
+        .navbar.scrolled {
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 0 0 25px 25px;
+            margin: 0 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
             font-weight: 800;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            animation: logoGlow 3s ease-in-out infinite alternate;
+            text-decoration: none;
         }
 
-        .logo i {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
-        }
-
-        .logo .brand-text {
+        .nav-logo i {
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .logo .brand-accent {
+        .nav-logo .brand-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-logo .brand-accent {
             background: var(--gradient-secondary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        @keyframes logoGlow {
-            0% {
-                filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
-                transform: scale(1);
-            }
-            100% {
-                filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.6));
-                transform: scale(1.02);
-            }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
         }
 
-        /* Coming Soon Title */
-        .coming-soon {
-            font-size: 4rem;
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
             font-weight: 900;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 50%, var(--accent-secondary) 100%);
@@ -191,19 +252,16 @@
                 filter: brightness(1);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.02);
                 filter: brightness(1.2);
             }
         }
 
-        /* Description */
-        .description {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-            max-width: 800px;
+        .hero-subtitle {
+            font-size: 1.6rem;
             color: var(--gray-light);
-            animation: fadeInUp 1s ease 0.5s both;
+            margin-bottom: 3rem;
+            line-height: 1.8;
         }
 
         .highlight {
@@ -212,109 +270,19 @@
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
-        /* Launch Date */
-        .launch-info {
-            background: rgba(17, 17, 17, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow);
-            animation: fadeInUp 1s ease 0.7s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .launch-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-
-        .launch-date {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-
-        .launch-subtitle {
-            font-size: 1.1rem;
-            color: var(--gray-light);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Countdown Timer */
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .countdown-item {
-            text-align: center;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem 1rem;
-            min-width: 100px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .countdown-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
-        }
-
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            display: block;
-            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            color: var(--gray-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-
-        /* Social Buttons */
-        .social-buttons {
+        .hero-buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.9s both;
+            margin-bottom: 4rem;
         }
 
-        .social-btn {
+        .btn {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
@@ -325,7 +293,7 @@
             overflow: hidden;
         }
 
-        .social-btn::before {
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -336,8 +304,19 @@
             transition: left 0.5s ease;
         }
 
-        .social-btn:hover::before {
+        .btn:hover::before {
             left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 212, 255, 0.4);
         }
 
         .btn-whatsapp {
@@ -351,73 +330,225 @@
             box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
         }
 
-        .btn-discord {
-            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
-            color: white;
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.3);
+        /* Specs Section */
+        .specs {
+            padding: 8rem 2rem;
+            background: rgba(17, 17, 17, 0.5);
+            backdrop-filter: blur(10px);
         }
 
-        .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(88, 101, 242, 0.4);
+        .specs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        /* Newsletter */
-        .newsletter {
-            margin-top: 4rem;
-            max-width: 500px;
-            animation: fadeInUp 1s ease 1.1s both;
-        }
-
-        .newsletter h3 {
-            font-size: 1.3rem;
+        .specs-title {
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .specs-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray-light);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .spec-card {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .spec-icon {
+            font-size: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .spec-description {
+            color: var(--gray-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-details {
+            list-style: none;
+            text-align: left;
+        }
+
+        .spec-details li {
+            padding: 0.5rem 0;
+            color: var(--text-color);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .spec-details li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-details i {
+            color: var(--accent-color);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-bg);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--gray-light);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
             color: var(--accent-color);
         }
 
-        .newsletter-form {
+        .footer-logo {
             display: flex;
-            gap: 1rem;
+            align-items: center;
+            gap: 10px;
+            font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 1rem;
         }
 
-        .newsletter input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 50px;
-            background: rgba(17, 17, 17, 0.8);
-            color: var(--text-color);
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter input:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-        }
-
-        .newsletter button {
-            padding: 1rem 2rem;
+        .footer-logo i {
             background: var(--gradient-primary);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo .brand-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo .brand-accent {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--accent-color);
             transition: all 0.3s ease;
         }
 
-        .newsletter button:hover {
-            transform: scale(1.05);
-            box-shadow: var(--glow);
+        .footer-social a:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
         }
 
-        .newsletter-note {
-            font-size: 0.9rem;
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
             color: var(--gray-light);
-            font-style: italic;
         }
 
         /* Animations */
@@ -434,176 +565,305 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .logo {
-                font-size: 2.5rem;
+            .navbar {
+                padding: 1rem;
             }
 
-            .coming-soon {
-                font-size: 2.5rem;
+            .navbar.scrolled {
+                margin: 0 1rem;
             }
 
-            .description {
-                font-size: 1.2rem;
-                padding: 0 1rem;
+            .nav-menu {
+                display: none;
             }
 
-            .launch-info {
-                padding: 2rem 1.5rem;
-                margin: 0 1rem 3rem;
+            .mobile-menu-btn {
+                display: block;
             }
 
-            .launch-date {
-                font-size: 1.8rem;
+            .hero-title {
+                font-size: 3rem;
             }
 
-            .countdown {
-                gap: 1rem;
+            .hero-subtitle {
+                font-size: 1.3rem;
             }
 
-            .countdown-item {
-                min-width: 80px;
-                padding: 1rem 0.5rem;
-            }
-
-            .countdown-number {
-                font-size: 2rem;
-            }
-
-            .social-buttons {
+            .hero-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
             }
 
-            .social-btn {
+            .btn {
                 width: 250px;
                 justify-content: center;
             }
 
-            .newsletter-form {
-                flex-direction: column;
+            .specs-title {
+                font-size: 2.5rem;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-card {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
-            .coming-soon {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .specs-title {
                 font-size: 2rem;
             }
 
-            .countdown {
-                gap: 0.5rem;
-            }
-
-            .countdown-item {
-                min-width: 70px;
-                padding: 0.8rem 0.3rem;
-            }
-
-            .countdown-number {
-                font-size: 1.5rem;
-            }
-
-            .countdown-label {
-                font-size: 0.8rem;
+            .spec-card {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
-    
     <div class="particles" id="particles"></div>
 
-    <div class="container">
-        <div class="logo">
-            <i class="fas fa-cubes"></i>
-            <span class="brand-text">Next</span><span class="brand-accent">Hosting</span>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-cubes"></i>
+                <span class="brand-text">Next</span><span class="brand-accent">Hosting</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#specs">Specs</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+    </nav>
 
-        <h1 class="coming-soon">Coming Soon</h1>
-
-        <p class="description">
-            Get ready for the <span class="highlight">next generation</span> of Minecraft server hosting. 
-            We're building something extraordinary with cutting-edge AMD EPYC processors, 
-            blazing-fast NVMe storage, and <span class="highlight">10Gbps networking</span> 
-            to deliver the ultimate gaming experience.
-        </p>
-
-        <div class="launch-info">
-            <div class="launch-date">May 27, 2025</div>
-            <div class="launch-subtitle">Global Launch Date</div>
-            
-            <div class="countdown" id="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            </div>
-
-            <p style="color: var(--gray-light); font-size: 1rem;">
-                Be the first to experience premium hosting with enterprise-grade infrastructure, 
-                24/7 expert support, and lightning-fast performance that will revolutionize your Minecraft experience.
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Selamat Datang</h1>
+            <p class="hero-subtitle">
+                Rasakan pengalaman hosting Minecraft terbaik dengan infrastruktur <span class="highlight">enterprise-grade</span>, 
+                performa <span class="highlight">lightning-fast</span>, dan dukungan 24/7 yang akan mengubah cara Anda bermain Minecraft.
             </p>
-        </div>
-
-        <div class="social-buttons">
-            <a href="https://chat.whatsapp.com/EjYXKzDNG4q9mmGmXvMk7X" class="social-btn btn-whatsapp" target="_blank">
-                <i class="fab fa-whatsapp"></i>
-                <span>Join WhatsApp Group</span>
-            </a>
-            <a href="/?" class="social-btn btn-discord" target="_blank">
-                <i class="fab fa-discord"></i>
-                <span>Join Discord Server</span>
-            </a>
-        </div>
-
-        <div class="newsletter">
-            <h3>Get Notified When We Launch</h3>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" id="emailInput">
-                <button onclick="subscribeNewsletter()">Notify Me</button>
+            <div class="hero-buttons">
+                <a href="#specs" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    <span>Get Started</span>
+                </a>
+                <a href="https://chat.whatsapp.com/EjYXKzDNG4q9mmGmXvMk7X" class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp Group</span>
+                </a>
             </div>
-            <p class="newsletter-note">We'll send you an exclusive early access invitation</p>
         </div>
-    </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section class="specs" id="specs">
+        <div class="specs-container">
+            <h2 class="specs-title">Server Specifications</h2>
+            <p class="specs-subtitle">
+                Powered by cutting-edge technology for the ultimate gaming experience
+            </p>
+            
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="spec-title">AMD EPYC Processors</h3>
+                    <p class="spec-description">
+                        Enterprise-grade processors with unmatched performance and reliability
+                    </p>
+                    <ul class="spec-details">
+                        <li><i class="fas fa-check"></i> Up to 64 cores per server</li>
+                        <li><i class="fas fa-check"></i> 3.4GHz+ boost clocks</li>
+                        <li><i class="fas fa-check"></i> Advanced cache architecture</li>
+                        <li><i class="fas fa-check"></i> PCIe 4.0 support</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <h3 class="spec-title">NVMe SSD Storage</h3>
+                    <p class="spec-description">
+                        Lightning-fast storage for instant world loading and zero lag
+                    </p>
+                    <ul class="spec-details">
+                        <li><i class="fas fa-check"></i> Up to 7GB/s read speeds</li>
+                        <li><i class="fas fa-check"></i> 1M+ IOPS performance</li>
+                        <li><i class="fas fa-check"></i> RAID 10 protection</li>
+                        <li><i class="fas fa-check"></i> Real-time backups</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="spec-title">10Gbps Network</h3>
+                    <p class="spec-description">
+                        Ultra-fast networking with global CDN for minimal latency
+                    </p>
+                    <ul class="spec-details">
+                        <li><i class="fas fa-check"></i> 10Gbps dedicated ports</li>
+                        <li><i class="fas fa-check"></i> Global edge locations</li>
+                        <li><i class="fas fa-check"></i> DDoS protection included</li>
+                        <li><i class="fas fa-check"></i> 99.9% uptime SLA</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3 class="spec-title">DDR4 ECC Memory</h3>
+                    <p class="spec-description">
+                        High-speed memory with error correction for maximum stability
+                    </p>
+                    <ul class="spec-details">
+                        <li><i class="fas fa-check"></i> Up to 512GB RAM</li>
+                        <li><i class="fas fa-check"></i> 3200MHz+ speeds</li>
+                        <li><i class="fas fa-check"></i> ECC error correction</li>
+                        <li><i class="fas fa-check"></i> Optimized for Java</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="spec-title">24/7 Expert Support</h3>
+                    <p class="spec-description">
+                        Professional support team ready to help anytime you need
+                    </p>
+                    <ul class="spec-details">
+                        <li><i class="fas fa-check"></i> 24/7 live chat support</li>
+                        <li><i class="fas fa-check"></i> Expert Minecraft techs</li>
+                        <li><i class="fas fa-check"></i> Free server setup</li>
+                        <li><i class="fas fa-check"></i> Plugin installation help</li>
+                    </ul>
+                </div>
+
+                <div class="spec-card">
+                    <div class="spec-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="spec-title">Security & Backups</h3>
+                    <p class="spec-description">
+                        Enterprise-grade security with automated backup solutions
+                    </p>
+                    <ul class="spec-details">
+                        <li><i class="fas fa-check"></i> Daily automated backups</li>
+                        <li><i class="fas fa-check"></i> Advanced firewall protection</li>
+                        <li><i class="fas fa-check"></i> SSL/TLS encryption</li>
+                        <li><i class="fas fa-check"></i> Malware scanning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-cubes"></i>
+                        <span class="brand-text">Next</span><span class="brand-accent">Hosting</span>
+                    </div>
+                    <p>Premium Minecraft server hosting with enterprise-grade infrastructure and 24/7 expert support.</p>
+                    <div class="footer-social">
+                        <a href="https://chat.whatsapp.com/EjYXKzDNG4q9mmGmXvMk7X" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <a href="#">Minecraft Hosting</a>
+                    <a href="#">VPS Hosting</a>
+                    <a href="#">Dedicated Servers</a>
+                    <a href="#">Game Panel</a>
+                    <a href="#">Plugin Installation</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#">Documentation</a>
+                    <a href="#">Knowledge Base</a>
+                    <a href="#">Community Forum</a>
+                    <a href="#">Ticket System</a>
+                    <a href="#">Server Status</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Refund Policy</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Next Hosting. All rights reserved. | Powered by AMD EPYC & NVMe Technology</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Countdown Timer
-        function updateCountdown() {
-            const launchDate = new Date('May 27, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
-            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
-
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<div style="color: var(--accent-color); font-size: 2rem; font-weight: 800;">We\'re Live!</div>';
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrolled = window.pageYOffset;
+            
+            if (scrolled > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        }
 
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+            // Parallax effect for background
+            const parallax = document.querySelector('.bg-animation');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+    </script>
+</body>
+</html>
 
         // Create floating particles
         function createParticles() {
@@ -621,30 +881,137 @@
 
         createParticles();
 
-        // Newsletter subscription (mock function)
-        function subscribeNewsletter() {
-            const email = document.getElementById('emailInput').value;
-            if (email && email.includes('@')) {
-                alert('Thank you! We\'ll notify you when Next Hosting launches on May 27, 2025!');
-                document.getElementById('emailInput').value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        }
-
-        // Add enter key support for newsletter
-        document.getElementById('emailInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                subscribeNewsletter();
-            }
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
 
-        // Add smooth scroll and animations on scroll
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all spec cards
+        document.querySelectorAll('.spec-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+       // Navbar scroll effect
         window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
             const scrolled = window.pageYOffset;
+            
+            if (scrolled > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Parallax effect for background
             const parallax = document.querySelector('.bg-animation');
             const speed = scrolled * 0.5;
             parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all spec cards
+        document.querySelectorAll('.spec-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>
