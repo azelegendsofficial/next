@@ -1,38 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Hosting - Premium Server Hosting</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Next Store - Digital Services</title>
     <style>
-        :root {
-            --primary-bg: #0a0a0a;
-            --secondary-bg: #111111;
-            --tertiary-bg: #1a1a1a;
-            --text-color: #ffffff;
-            --accent-color: #00d4ff;
-            --accent-secondary: #ff6b35;
-            --gray-light: #a0a0a0;
-            --gray-dark: #222222;
-            --shadow: 0 20px 60px rgba(0, 212, 255, 0.15);
-            --glow: 0 0 30px rgba(0, 212, 255, 0.3);
-            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-            --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background: var(--primary-bg);
-            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
             overflow-x: hidden;
-            line-height: 1.6;
+            min-height: 100vh;
         }
 
         /* Animated Background */
@@ -42,517 +26,181 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            background: var(--primary-bg);
+            z-index: -1;
+            overflow: hidden;
         }
 
         .bg-animation::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
-            animation: bgShift 20s ease-in-out infinite alternate;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
         }
 
-        @keyframes bgShift {
-            0% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(1.1) rotate(1deg);
-                opacity: 1;
-            }
+        @keyframes moveBackground {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Floating particles */
-        .particles {
+        /* Header */
+        header {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: float 8s linear infinite;
-        }
-
-        .particle:nth-child(odd) {
-            background: var(--accent-secondary);
-            animation-duration: 12s;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 2rem;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(0px);
+            padding: 1rem 0;
+            animation: slideDown 0.8s ease-out;
         }
 
-        .navbar.scrolled {
-            background: rgba(17, 17, 17, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 0 0 25px 25px;
-            margin: 0 2rem;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(0, 212, 255, 0.2);
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
-        .nav-container {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-decoration: none;
-        }
-
-        .nav-logo i {
-            background: var(--gradient-primary);
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        .nav-logo .brand-text {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+            to { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
         }
 
-        .nav-logo .brand-accent {
-            background: var(--gradient-secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-menu {
+        .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
-            align-items: center;
         }
 
-        .nav-menu a {
-            color: var(--text-color);
+        .nav-links a {
+            color: #ffffff;
             text-decoration: none;
-            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
         }
 
-        .nav-menu a:hover {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .nav-menu a::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gradient-primary);
+            background: #ffffff;
             transition: width 0.3s ease;
         }
 
-        .nav-menu a:hover::after {
+        .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* Mobile menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
+        /* Main Content */
+        main {
+            margin-top: 80px;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 0 2rem;
-            position: relative;
+            padding: 2rem;
         }
 
-        .hero-content {
-            max-width: 1000px;
-            animation: fadeInUp 1s ease both;
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 50%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titlePulse 4s ease-in-out infinite;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        @keyframes titlePulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: brightness(1);
-            }
-            50% {
-                transform: scale(1.02);
-                filter: brightness(1.2);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: 1.6rem;
-            color: var(--gray-light);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .highlight {
-            color: var(--accent-color);
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 212, 255, 0.4);
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-whatsapp:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
-        }
-
-        /* Specs Section */
-        .specs {
-            padding: 8rem 2rem;
-            background: rgba(17, 17, 17, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .specs-container {
+        .hero {
             max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .specs-title {
-            font-size: 3rem;
-            font-weight: 800;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
             margin-bottom: 1rem;
-            background: var(--gradient-primary);
+            background: linear-gradient(45deg, #ffffff, #888888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: pulse 2s infinite;
         }
 
-        .specs-subtitle {
-            font-size: 1.3rem;
-            color: var(--gray-light);
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .specs-grid {
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.9; }
+        }
+
+        /* Products Grid */
+        .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 4rem;
+            margin: 3rem 0;
+            width: 100%;
+            max-width: 1200px;
         }
 
-        .spec-card {
-            background: rgba(17, 17, 17, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            animation: slideInUp 0.8s ease-out;
+            animation-fill-mode: both;
         }
 
-        .spec-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.05), transparent);
-            animation: shimmer 3s infinite;
-        }
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+        .product-card:nth-child(7) { animation-delay: 0.7s; }
 
-        .spec-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow);
-            border-color: var(--accent-color);
-        }
-
-        .spec-icon {
-            font-size: 3rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-        }
-
-        .spec-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .spec-description {
-            color: var(--gray-light);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .spec-details {
-            list-style: none;
-            text-align: left;
-        }
-
-        .spec-details li {
-            padding: 0.5rem 0;
-            color: var(--text-color);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .spec-details li:last-child {
-            border-bottom: none;
-        }
-
-        .spec-details i {
-            color: var(--accent-color);
-            margin-right: 10px;
-            width: 20px;
-        }
-
-        @keyframes shimmer {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--secondary-bg);
-            padding: 4rem 2rem 2rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: var(--gray-light);
-            text-decoration: none;
-            margin-bottom: 0.8rem;
-            display: block;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .footer-logo i {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-logo .brand-text {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-logo .brand-accent {
-            background: var(--gradient-secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            color: var(--accent-color);
-            transition: all 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            background: var(--accent-color);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            color: var(--gray-light);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
+        @keyframes slideInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -563,322 +211,257 @@
             }
         }
 
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .product-card p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Order Button */
+        .order-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            color: #000000;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: bounceIn 1s ease-out;
+            animation-delay: 1s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .order-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .order-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .audio-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .audio-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .audio-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .navbar.scrolled {
-                margin: 0 1rem;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 250px;
-                justify-content: center;
-            }
-
-            .specs-title {
+            .hero h1 {
                 font-size: 2.5rem;
             }
-
-            .specs-grid {
-                grid-template-columns: 1fr;
+            
+            .hero p {
+                font-size: 1.2rem;
             }
-
-            .spec-card {
-                padding: 2rem;
-            }
-
-            .footer-content {
+            
+            .products {
                 grid-template-columns: 1fr;
-                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
 
-            .specs-title {
-                font-size: 2rem;
-            }
-
-            .spec-card {
-                padding: 1.5rem;
-            }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
-    <div class="particles" id="particles"></div>
-
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <i class="fas fa-cubes"></i>
-                <span class="brand-text">Next</span><span class="brand-accent">Hosting</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/pricing.html">Specs</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#support">Support</a></li>
+    
+    <header>
+        <nav>
+            <div class="logo">Next Store</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="hero-title">Selamat Datang</h1>
-            <p class="hero-subtitle">
-                Rasakan pengalaman hosting terbaik dengan infrastruktur <span class="highlight">enterprise-grade</span>, 
-                performa <span class="highlight">lightning-fast</span>, dan dukungan 24/7 yang akan mengubah cara Anda bermain.
-            </p>
-            <div class="hero-buttons">
-                <a href="/pricing.html" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i>
-                    <span>Get Started</span>
-                </a>
-                <a href="https://chat.whatsapp.com/EjYXKzDNG4q9mmGmXvMk7X" class="btn btn-whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp Group</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Specs Section -->
-    <section class="specs" id="specs">
-        <div class="specs-container">
-            <h2 class="specs-title">Server Specifications</h2>
-            <p class="specs-subtitle">
-                Powered by cutting-edge technology for the ultimate gaming experience
-            </p>
+    <main>
+        <section class="hero">
+            <h1>Welcome to Next Store</h1>
+            <p>Your One-Stop Digital Services Solution</p>
             
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <div class="spec-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3 class="spec-title">AMD EPYC Processors</h3>
-                    <p class="spec-description">
-                        Enterprise-grade processors with unmatched performance and reliability
-                    </p>
-                    <ul class="spec-details">
-                        <li><i class="fas fa-check"></i> Up to 64 cores per server</li>
-                        <li><i class="fas fa-check"></i> 3.4GHz+ boost clocks</li>
-                        <li><i class="fas fa-check"></i> Advanced cache architecture</li>
-                        <li><i class="fas fa-check"></i> PCIe 4.0 support</li>
-                    </ul>
+            <div class="products">
+                <div class="product-card scroll-reveal">
+                    <h3>VPS Digital Ocean</h3>
+                    <p>High-performance cloud servers with reliable uptime and flexible configurations for all your hosting needs.</p>
                 </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">
-                        <i class="fas fa-hdd"></i>
-                    </div>
-                    <h3 class="spec-title">NVMe SSD Storage</h3>
-                    <p class="spec-description">
-                        Lightning-fast storage for instant world loading and zero lag
-                    </p>
-                    <ul class="spec-details">
-                        <li><i class="fas fa-check"></i> Up to 7GB/s read speeds</li>
-                        <li><i class="fas fa-check"></i> 1M+ IOPS performance</li>
-                        <li><i class="fas fa-check"></i> RAID 10 protection</li>
-                        <li><i class="fas fa-check"></i> Real-time backups</li>
-                    </ul>
+                
+                <div class="product-card scroll-reveal">
+                    <h3>Hosting MC Java & Bedrock</h3>
+                    <p>Premium Minecraft server hosting with low latency and 24/7 support for both Java and Bedrock editions.</p>
                 </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <h3 class="spec-title">10Gbps Network</h3>
-                    <p class="spec-description">
-                        Ultra-fast networking with global CDN for minimal latency
-                    </p>
-                    <ul class="spec-details">
-                        <li><i class="fas fa-check"></i> 10Gbps dedicated ports</li>
-                        <li><i class="fas fa-check"></i> Global edge locations</li>
-                        <li><i class="fas fa-check"></i> DDoS protection included</li>
-                        <li><i class="fas fa-check"></i> 99.9% uptime SLA</li>
-                    </ul>
+                
+                <div class="product-card scroll-reveal">
+                    <h3>Top Up All Games</h3>
+                    <p>Instant game credits and diamonds for all popular mobile games. Fast, secure, and affordable.</p>
                 </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">
-                        <i class="fas fa-memory"></i>
-                    </div>
-                    <h3 class="spec-title">DDR4 ECC Memory</h3>
-                    <p class="spec-description">
-                        High-speed memory with error correction for maximum stability
-                    </p>
-                    <ul class="spec-details">
-                        <li><i class="fas fa-check"></i> Up to 512GB RAM</li>
-                        <li><i class="fas fa-check"></i> 3200MHz+ speeds</li>
-                        <li><i class="fas fa-check"></i> ECC error correction</li>
-                        <li><i class="fas fa-check"></i> Optimized for Java</li>
-                    </ul>
+                
+                <div class="product-card scroll-reveal">
+                    <h3>Isi Pulsa</h3>
+                    <p>Quick and easy mobile credit top-up for all Indonesian carriers with competitive rates.</p>
                 </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3 class="spec-title">24/7 Expert Support</h3>
-                    <p class="spec-description">
-                        Professional support team ready to help anytime you need
-                    </p>
-                    <ul class="spec-details">
-                        <li><i class="fas fa-check"></i> 24/7 live chat support</li>
-                        <li><i class="fas fa-check"></i> Expert Minecraft techs</li>
-                        <li><i class="fas fa-check"></i> Free server setup</li>
-                        <li><i class="fas fa-check"></i> Plugin installation help</li>
-                    </ul>
+                
+                <div class="product-card scroll-reveal">
+                    <h3>Admin Panel Pterodactyl</h3>
+                    <p>Professional game server management panel with advanced features and user-friendly interface.</p>
                 </div>
-
-                <div class="spec-card">
-                    <div class="spec-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="spec-title">Security & Backups</h3>
-                    <p class="spec-description">
-                        Enterprise-grade security with automated backup solutions
-                    </p>
-                    <ul class="spec-details">
-                        <li><i class="fas fa-check"></i> Daily automated backups</li>
-                        <li><i class="fas fa-check"></i> Advanced firewall protection</li>
-                        <li><i class="fas fa-check"></i> SSL/TLS encryption</li>
-                        <li><i class="fas fa-check"></i> Malware scanning</li>
-                    </ul>
+                
+                <div class="product-card scroll-reveal">
+                    <h3>Murbug Services</h3>
+                    <p>Specialized debugging and optimization services for your applications and servers.</p>
+                </div>
+                
+                <div class="product-card scroll-reveal">
+                    <h3>Suntik Followers</h3>
+                    <p>Boost your social media presence with genuine followers and engagement across all platforms.</p>
                 </div>
             </div>
+            
+            <a href="product.html" class="order-btn">Order Now!</a>
+        </section>
+    </main>
+
+    <div class="audio-controls">
+        <div class="audio-toggle" onclick="toggleAudio()">
+            <svg id="audioIcon" viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <i class="fas fa-cubes"></i>
-                        <span class="brand-text">Next</span><span class="brand-accent">Hosting</span>
-                    </div>
-                    <p>Premium Minecraft server hosting with enterprise-grade infrastructure and 24/7 expert support.</p>
-                    <div class="footer-social">
-                        <a href="https://chat.whatsapp.com/EjYXKzDNG4q9mmGmXvMk7X" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <a href="#">Minecraft Hosting</a>
-                    <a href="#">VPS Hosting</a>
-                    <a href="#">Dedicated Servers</a>
-                    <a href="#">Game Panel</a>
-                    <a href="#">Plugin Installation</a>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <a href="#">Documentation</a>
-                    <a href="#">Knowledge Base</a>
-                    <a href="#">Community Forum</a>
-                    <a href="#">Ticket System</a>
-                    <a href="#">Server Status</a>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Refund Policy</a>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 Next Hosting. All rights reserved. | Powered by AMD EPYC & NVMe Technology</p>
-            </div>
-        </div>
-    </footer>
+    <audio id="backgroundMusic" loop>
+        <source src="http://nextstore.wuaze.com/assets/Tumblr Girls (G-Eazy feat. Christoph Andersson) Edit Audio.mp3" type="audio/wav">
+        <!-- Fallback for browsers that don't support the audio element -->
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const scrolled = window.pageYOffset;
-            
-            if (scrolled > 100) {
-                navbar.classList.add('scrolled');
+        // Audio Control
+        let audioPlaying = false;
+        const audio = document.getElementById('backgroundMusic');
+        const audioIcon = document.getElementById('audioIcon');
+
+        function toggleAudio() {
+            if (audioPlaying) {
+                audio.pause();
+                audioIcon.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+                audioPlaying = false;
             } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            // Parallax effect for background
-            const parallax = document.querySelector('.bg-animation');
-            const speed = scrolled * 0.5;
-            parallax.style.transform = `translateY(${speed}px)`;
-    </script>
-    <script>
-
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (8 + Math.random() * 4) + 's';
-                particlesContainer.appendChild(particle);
+                audio.play().catch(e => console.log('Audio play failed:', e));
+                audioIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+                audioPlaying = true;
             }
         }
-
-        createParticles();
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -894,123 +477,81 @@
             });
         });
 
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+        // Scroll reveal animation
+        function revealElements() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
                 }
             });
-        }, observerOptions);
-
-        // Observe all spec cards
-        document.querySelectorAll('.spec-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Add loading animation
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-
-       // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const scrolled = window.pageYOffset;
-            
-            if (scrolled > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            // Parallax effect for background
-            const parallax = document.querySelector('.bg-animation');
-            const speed = scrolled * 0.5;
-            parallax.style.transform = `translateY(${speed}px)`;
-        });
-
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (8 + Math.random() * 4) + 's';
-                particlesContainer.appendChild(particle);
-            }
         }
 
-        createParticles();
+        window.addEventListener('scroll', revealElements);
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particle.style.opacity = Math.random();
+            document.body.appendChild(particle);
+
+            // Animate particle
+            let position = 0;
+            const speed = Math.random() * 2 + 1;
+            
+            function moveParticle() {
+                position += speed;
+                particle.style.top = position + 'px';
+                
+                if (position > window.innerHeight) {
+                    particle.remove();
+                } else {
+                    requestAnimationFrame(moveParticle);
                 }
-            });
+            }
+            
+            moveParticle();
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+
+        // Initialize scroll reveal
+        revealElements();
+
+        // Smooth loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
         });
 
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all spec cards
-        document.querySelectorAll('.spec-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Add loading animation
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
+        // Add mouse move effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: all 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const cursorElement = document.querySelector('.cursor');
+            cursorElement.style.left = e.clientX - 10 + 'px';
+            cursorElement.style.top = e.clientY - 10 + 'px';
         });
     </script>
 </body>
