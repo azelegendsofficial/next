@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Store - Pricing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: moveBackground 15s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 100px;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ffffff, #888888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Product Sections */
+        .product-section {
+            margin-bottom: 4rem;
+            animation: slideInLeft 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .product-section:nth-child(2) { animation-delay: 0.1s; }
+        .product-section:nth-child(3) { animation-delay: 0.2s; }
+        .product-section:nth-child(4) { animation-delay: 0.3s; }
+        .product-section:nth-child(5) { animation-delay: 0.4s; }
+        .product-section:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(45deg, #ffffff, #888888);
+            animation: expandWidth 1s ease-out;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .pricing-card:hover::before {
+            left: 100%;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .card-specs {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .order-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            color: #000000;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Special Sections */
+        .game-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .game-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .game-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .game-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .service-description {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .service-description h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .service-description p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                padding: 0 1rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Next Store</a>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">Our Pricing Plans</h1>
+
+        <!-- VPS Digital Ocean -->
+        <section class="product-section">
+            <h2 class="section-title">VPS Digital Ocean</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic VPS</h3>
+                    <p class="card-specs">RAM: 1GB<br>CPU Core: 1<br>Storage: SSD</p>
+                    <div class="card-price">Rp 22,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Basic VPS - 1GB RAM, 1 Core - Rp 22,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Standard VPS</h3>
+                    <p class="card-specs">RAM: 2GB<br>CPU Core: 1<br>Storage: SSD</p>
+                    <div class="card-price">Rp 32,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Standard VPS - 2GB RAM, 1 Core - Rp 32,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Performance VPS</h3>
+                    <p class="card-specs">RAM: 2GB<br>CPU Core: 2<br>Storage: SSD</p>
+                    <div class="card-price">Rp 37,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Performance VPS - 2GB RAM, 2 Core - Rp 37,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Advanced VPS</h3>
+                    <p class="card-specs">RAM: 4GB<br>CPU Core: 2<br>Storage: SSD</p>
+                    <div class="card-price">Rp 46,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Advanced VPS - 4GB RAM, 2 Core - Rp 46,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Pro VPS</h3>
+                    <p class="card-specs">RAM: 8GB<br>CPU Core: 2<br>Storage: SSD</p>
+                    <div class="card-price">Rp 52,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Pro VPS - 8GB RAM, 2 Core - Rp 52,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Pro Max VPS</h3>
+                    <p class="card-specs">RAM: 8GB<br>CPU Core: 4<br>Storage: SSD</p>
+                    <div class="card-price">Rp 57,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Pro Max VPS - 8GB RAM, 4 Core - Rp 57,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Enterprise VPS</h3>
+                    <p class="card-specs">RAM: 16GB<br>CPU Core: 4<br>Storage: SSD</p>
+                    <div class="card-price">Rp 72,000</div>
+                    <a href="#" class="order-btn" onclick="orderVPS('Enterprise VPS - 16GB RAM, 4 Core - Rp 72,000')">Order Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hosting MC Java & Bedrock -->
+        <section class="product-section">
+            <h2 class="section-title">Hosting MC Java & Bedrock</h2>
+            
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: #ffffff;">Basic Hosting</h3>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic 1GB</h3>
+                    <p class="card-specs">RAM: 1GB (100%)<br>Storage: 2GB<br>Players: Unlimited</p>
+                    <div class="card-price">Rp 4,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Basic Hosting 1GB - Rp 4,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic 2GB</h3>
+                    <p class="card-specs">RAM: 2GB (120%)<br>Storage: 4GB<br>Players: Unlimited</p>
+                    <div class="card-price">Rp 7,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Basic Hosting 2GB - Rp 7,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic 3GB</h3>
+                    <p class="card-specs">RAM: 3GB (140%)<br>Storage: 6GB<br>Players: Unlimited</p>
+                    <div class="card-price">Rp 10,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Basic Hosting 3GB - Rp 10,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic 4GB</h3>
+                    <p class="card-specs">RAM: 4GB (160%)<br>Storage: 8GB<br>Players: Unlimited</p>
+                    <div class="card-price">Rp 13,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Basic Hosting 4GB - Rp 13,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic 5GB</h3>
+                    <p class="card-specs">RAM: 5GB (180%)<br>Storage: 10GB<br>Players: Unlimited</p>
+                    <div class="card-price">Rp 16,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Basic Hosting 5GB - Rp 16,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Basic 6GB</h3>
+                    <p class="card-specs">RAM: 6GB (200%)<br>Storage: 12GB<br>Players: Unlimited</p>
+                    <div class="card-price">Rp 19,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Basic Hosting 6GB - Rp 19,000')">Order Now</a>
+                </div>
+            </div>
+
+            <h3 style="font-size: 1.5rem; margin: 2rem 0 1.5rem; color: #ffffff;">Private Hosting</h3>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 1GB</h3>
+                    <p class="card-specs">RAM: 1GB (100%)<br>Storage: 2GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 5,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 1GB - Rp 5,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 2GB</h3>
+                    <p class="card-specs">RAM: 2GB (120%)<br>Storage: 4GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 10,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 2GB - Rp 10,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 3GB</h3>
+                    <p class="card-specs">RAM: 3GB (140%)<br>Storage: 6GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 15,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 3GB - Rp 15,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 4GB</h3>
+                    <p class="card-specs">RAM: 4GB (160%)<br>Storage: 8GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 20,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 4GB - Rp 20,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 5GB</h3>
+                    <p class="card-specs">RAM: 5GB (180%)<br>Storage: 10GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 25,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 5GB - Rp 25,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 6GB</h3>
+                    <p class="card-specs">RAM: 6GB (200%)<br>Storage: 12GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 30,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 6GB - Rp 30,000')">Order Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">Private 7GB</h3>
+                    <p class="card-specs">RAM: 7GB (220%)<br>Storage: 14GB<br>Dedicated Resources</p>
+                    <div class="card-price">Rp 35,000</div>
+                    <a href="#" class="order-btn" onclick="orderHosting('Private Hosting 7GB - Rp 35,000')">Order Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Up All Games -->
+        <section class="product-section">
+            <h2 class="section-title">Top Up All Games</h2>
+            <div class="game-section">
+                <div class="game-card">
+                    <h3 class="game-title">FREE FIRE</h3>
+                    <div class="game-options">
+                        <div class="game-option">
+                            <span>5 Diamond</span>
+                            <span>Rp 3,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>12 Diamond</span>
+                            <span>Rp 5,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>50 Diamond</span>
+                            <span>Rp 15,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>70 Diamond</span>
+                            <span>Rp 20,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>100 Diamond</span>
+                            <span>Rp 23,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>140 Diamond</span>
+                            <span>Rp 29,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>210 Diamond</span>
+                            <span>Rp 37,000</span>
+                        </div>
+                    </div>
+                    <a href="#" class="whatsapp-btn" onclick="orderGame('Free Fire Top Up')">Order via WhatsApp</a>
+                </div>
+
+                <div class="game-card">
+                    <h3 class="game-title">PUBG MOBILE</h3>
+                    <div class="game-options">
+                        <div class="game-option">
+                            <span>25 UC</span>
+                            <span>Rp 14,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>35 UC</span>
+                            <span>Rp 24,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>50 UC</span>
+                            <span>Rp 25,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>70 UC</span>
+                            <span>Rp 30,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>100 UC</span>
+                            <span>Rp 50,000</span>
+                        </div>
+                        <div class="game-option">
+                            <span>125 UC</span>
+                            <span>Rp 42,000</span>
+                        </div>
+                    </div>
+                    <a href="#" class="whatsapp-btn" onclick="orderGame('PUBG Mobile Top Up')">Order via WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Isi Pulsa -->
+        <section class="product-section">
+            <h2 class="section-title">Isi Pulsa</h2>
+            <div class="service-description">
+                <h3>Layanan Isi Pulsa</h3>
+                <p>Kami menyediakan layanan isi pulsa untuk semua operator di Indonesia dengan harga terjangkau dan proses yang cepat. Hubungi kami untuk informasi lebih lanjut mengenai harga dan promo yang tersedia.</p>
+                <a href="#isipulsa" class="whatsapp-btn" onclick="contactService('Isi Pulsa')">Contact via WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- Admin Panel Pterodactyl -->
+        <section class="product-section">
+            <h2 class="section-title">Admin Panel Pterodactyl</h2>
+            <div class="service-description">
+                <h3>Panel Management Pterodactyl</h3>
+                <p>Dapatkan admin panel Pterodactyl yang powerful untuk mengelola game server Anda dengan mudah. Panel management yang user-friendly dengan fitur lengkap untuk monitoring dan kontrol server.</p>
+                <a href="#adp" class="whatsapp-btn" onclick="contactService('Admin Panel Pterodactyl')">Contact via WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- Murbug Services -->
+        <section class="product-section">
+            <h2 class="section-title">Murbug Services</h2>
+            <div class="service-description">
+                <h3>Layanan Debugging Professional</h3>
+                <p>Tim ahli kami siap membantu Anda mengatasi berbagai masalah teknis, bug, dan optimasi pada aplikasi atau server Anda. Solusi debugging yang cepat dan terpercaya.</p>
+                <a href="#murbug" class="whatsapp-btn" onclick="contactService('Murbug Services')">Contact via WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- Suntik Followers -->
+        <section class="product-section">
+            <h2 class="section-title">Suntik Followers</h2>
+            <div class="service-description">
+                <h3>Boost Social Media Followers</h3>
+                <p>Tingkatkan popularitas akun media sosial Anda dengan layanan penambahan followers yang aman dan berkualitas. Tersedia untuk Instagram, TikTok, Twitter, dan platform lainnya.</p>
+                <a href="#suntikfollowers" class="whatsapp-btn" onclick="contactService('Suntik Followers')">Contact via WhatsApp</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // WhatsApp functions
+        const ownerWhatsApp = "6285242510587"; // Ganti dengan nomor WhatsApp owner
+
+        function orderVPS(product) {
+            const message = `Halo, saya tertarik untuk memesan ${product}. Bisa tolong berikan informasi lebih lanjut?`;
+            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function orderHosting(product) {
+            const message = `Halo, saya ingin memesan ${product}. Mohon informasi lebih lanjut mengenai setup dan pembayaran.`;
+            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function orderGame(product) {
+            const message = `Halo, saya ingin melakukan top up untuk ${product}. Mohon bantuan untuk proses pemesanan.`;
+            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function contactService(service) {
+            const message = `Halo, saya tertarik dengan layanan ${service}. Bisa tolong jelaskan lebih detail mengenai layanan ini?`;
+            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Animation on scroll
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.product-section');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('fade-in');
+                }
+            });
+        });
+
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.pricing-card, .game-card, .service-description');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
