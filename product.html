@@ -289,14 +289,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem;
+            padding: 0.8rem;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .game-option:hover {
             background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .game-option .amount {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .game-option .price {
+            color: #25D366;
+            font-weight: bold;
         }
 
         /* WhatsApp Button */
@@ -535,160 +550,178 @@
                 <div class="game-card">
                     <h3 class="game-title">FREE FIRE</h3>
                     <div class="game-options">
-                        <div class="game-option">
-                            <span>5 Diamond</span>
-                            <span>Rp 3,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '5 Diamond', 'Rp 2,000')">
+                            <span class="amount">5 Diamond</span>
+                            <span class="price">Rp 2,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>12 Diamond</span>
-                            <span>Rp 5,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '12 Diamond', 'Rp 3,000')">
+                            <span class="amount">12 Diamond</span>
+                            <span class="price">Rp 3,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>50 Diamond</span>
-                            <span>Rp 15,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '50 Diamond', 'Rp 7,000')">
+                            <span class="amount">50 Diamond</span>
+                            <span class="price">Rp 7,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>70 Diamond</span>
-                            <span>Rp 20,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '70 Diamond', 'Rp 10,000')">
+                            <span class="amount">70 Diamond</span>
+                            <span class="price">Rp 10,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>100 Diamond</span>
-                            <span>Rp 23,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '100 Diamond', 'Rp 15,000')">
+                            <span class="amount">100 Diamond</span>
+                            <span class="price">Rp 15,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>140 Diamond</span>
-                            <span>Rp 29,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '140 Diamond', 'Rp 19,000')">
+                            <span class="amount">140 Diamond</span>
+                            <span class="price">Rp 19,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>210 Diamond</span>
-                            <span>Rp 37,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('FREE FIRE', '210 Diamond', 'Rp 38,000')">
+                            <span class="amount">210 Diamond</span>
+                            <span class="price">Rp 38,000</span>
                         </div>
                     </div>
-                    <a href="#" class="whatsapp-btn" onclick="orderGame('Free Fire Top Up')">Order via WhatsApp</a>
                 </div>
 
                 <div class="game-card">
                     <h3 class="game-title">PUBG MOBILE</h3>
                     <div class="game-options">
-                        <div class="game-option">
-                            <span>25 UC</span>
-                            <span>Rp 14,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('PUBG MOBILE', '25 UC', 'Rp 14,000')">
+                            <span class="amount">25 UC</span>
+                            <span class="price">Rp 14,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>35 UC</span>
-                            <span>Rp 24,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('PUBG MOBILE', '35 UC', 'Rp 24,000')">
+                            <span class="amount">35 UC</span>
+                            <span class="price">Rp 24,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>50 UC</span>
-                            <span>Rp 25,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('PUBG MOBILE', '50 UC', 'Rp 25,000')">
+                            <span class="amount">50 UC</span>
+                            <span class="price">Rp 25,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>70 UC</span>
-                            <span>Rp 30,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('PUBG MOBILE', '70 UC', 'Rp 30,000')">
+                            <span class="amount">70 UC</span>
+                            <span class="price">Rp 30,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>100 UC</span>
-                            <span>Rp 50,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('PUBG MOBILE', '100 UC', 'Rp 36,000')">
+                            <span class="amount">100 UC</span>
+                            <span class="price">Rp 36,000</span>
                         </div>
-                        <div class="game-option">
-                            <span>125 UC</span>
-                            <span>Rp 42,000</span>
+                        <div class="game-option" onclick="orderSpecificTopUp('PUBG MOBILE', '125 UC', 'Rp 42,000')">
+                            <span class="amount">125 UC</span>
+                            <span class="price">Rp 42,000</span>
                         </div>
                     </div>
-                    <a href="#" class="whatsapp-btn" onclick="orderGame('PUBG Mobile Top Up')">Order via WhatsApp</a>
+                </div>
+
+                <div class="game-card">
+                    <h3 class="game-title">GENSHIN IMPACT</h3>
+                    <div class="game-options">
+                        <div class="game-option" onclick="orderSpecificTopUp('GENSHIN IMPACT', '60 Genesis Crystals', 'Rp 14,000')">
+                            <span class="amount">60 Genesis Crystals</span>
+                            <span class="price">Rp 14,000</span>
+                        </div>
+                        <div class="game-option" onclick="orderSpecificTopUp('GENSHIN IMPACT', '330 Genesis Crystals', 'Rp 62,000')">
+                            <span class="amount">330 Genesis Crystals</span>
+                            <span class="price">Rp 62,000</span>
+                        </div>
+                        <div class="game-option" onclick="orderSpecificTopUp('GENSHIN IMPACT', '1090 Genesis Crystals', 'Rp 188,000')">
+                            <span class="amount">1090 Genesis Crystals</span>
+                            <span class="price">Rp 188,000</span>
+                        </div>
+                        <div class="game-option" onclick="orderSpecificTopUp('GENSHIN IMPACT', '2240 Genesis Crystals', 'Rp 703,000')">
+                            <span class="amount">2240 Genesis Crystals</span>
+                            <span class="price">Rp 703,000</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Isi Pulsa -->
+        <!-- Domain Services -->
         <section class="product-section">
-            <h2 class="section-title">Isi Pulsa</h2>
+            <h2 class="section-title">Domain Services</h2>
             <div class="service-description">
-                <h3>Layanan Isi Pulsa</h3>
-                <p>Kami menyediakan layanan isi pulsa untuk semua operator di Indonesia dengan harga terjangkau dan proses yang cepat. Hubungi kami untuk informasi lebih lanjut mengenai harga dan promo yang tersedia.</p>
-                <a href="#isipulsa" class="whatsapp-btn" onclick="contactService('Isi Pulsa')">Contact via WhatsApp</a>
+                <h3>Professional Domain Registration</h3>
+                <p>Secure your digital identity with our comprehensive domain registration services. We offer competitive pricing and reliable management for all major domain extensions.</p>
+                <a href="#" class="whatsapp-btn" onclick="orderDomain()">Contact for Domain Pricing</a>
             </div>
         </section>
 
-        <!-- Admin Panel Pterodactyl -->
+        <!-- Subdomain Services -->
         <section class="product-section">
-            <h2 class="section-title">Admin Panel Pterodactyl</h2>
+            <h2 class="section-title">Subdomain Services</h2>
             <div class="service-description">
-                <h3>Panel Management Pterodactyl</h3>
-                <p>Dapatkan admin panel Pterodactyl yang powerful untuk mengelola game server Anda dengan mudah. Panel management yang user-friendly dengan fitur lengkap untuk monitoring dan kontrol server.</p>
-                <a href="#adp" class="whatsapp-btn" onclick="contactService('Admin Panel Pterodactyl')">Contact via WhatsApp</a>
+                <h3>Free & Premium Subdomains</h3>
+                <p>Get started quickly with our subdomain services. Perfect for testing, development, or personal projects. Choose from various extensions and customize your web presence.</p>
+                <a href="#" class="whatsapp-btn" onclick="orderSubdomain()">Get Free Subdomain</a>
             </div>
         </section>
 
-        <!-- Murbug Services -->
+        <!-- Custom Services -->
         <section class="product-section">
-            <h2 class="section-title">Murbug Services</h2>
+            <h2 class="section-title">Custom Services</h2>
             <div class="service-description">
-                <h3>Layanan Debugging Professional</h3>
-                <p>Tim ahli kami siap membantu Anda mengatasi berbagai masalah teknis, bug, dan optimasi pada aplikasi atau server Anda. Solusi debugging yang cepat dan terpercaya.</p>
-                <a href="#murbug" class="whatsapp-btn" onclick="contactService('Murbug Services')">Contact via WhatsApp</a>
-            </div>
-        </section>
-
-        <!-- Suntik Followers -->
-        <section class="product-section">
-            <h2 class="section-title">Suntik Followers</h2>
-            <div class="service-description">
-                <h3>Boost Social Media Followers</h3>
-                <p>Tingkatkan popularitas akun media sosial Anda dengan layanan penambahan followers yang aman dan berkualitas. Tersedia untuk Instagram, TikTok, Twitter, dan platform lainnya.</p>
-                <a href="#suntikfollowers" class="whatsapp-btn" onclick="contactService('Suntik Followers')">Contact via WhatsApp</a>
+                <h3>Tailored Solutions for Your Needs</h3>
+                <p>Need something specific? We offer custom hosting solutions, specialized configurations, and personalized support to meet your unique requirements.</p>
+                <a href="#" class="whatsapp-btn" onclick="orderCustom()">Discuss Custom Solutions</a>
             </div>
         </section>
     </main>
 
     <script>
-        // WhatsApp functions
-        const ownerWhatsApp = "6285242510587"; // Ganti dengan nomor WhatsApp owner
+        // WhatsApp contact number
+        const whatsappNumber = '6281234567890'; // Replace with actual WhatsApp number
 
-        function orderVPS(product) {
-            const message = `Halo, saya tertarik untuk memesan ${product}. Bisa tolong berikan informasi lebih lanjut?`;
-            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+        function orderVPS(plan) {
+            const message = `Halo! Saya tertarik untuk memesan VPS Digital Ocean dengan paket: ${plan}. Bisakah Anda memberikan informasi lebih lanjut?`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         }
 
-        function orderHosting(product) {
-            const message = `Halo, saya ingin memesan ${product}. Mohon informasi lebih lanjut mengenai setup dan pembayaran.`;
-            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+        function orderHosting(plan) {
+            const message = `Halo! Saya ingin memesan Hosting Minecraft dengan paket: ${plan}. Mohon informasi lebih lanjut mengenai proses pemesanan.`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         }
 
-        function orderGame(product) {
-            const message = `Halo, saya ingin melakukan top up untuk ${product}. Mohon bantuan untuk proses pemesanan.`;
-            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+        function orderSpecificTopUp(game, amount, price) {
+            const message = `Halo! Saya ingin melakukan top up untuk game ${game} dengan paket: ${amount} seharga ${price}. Bagaimana cara prosesnya?`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         }
 
-        function contactService(service) {
-            const message = `Halo, saya tertarik dengan layanan ${service}. Bisa tolong jelaskan lebih detail mengenai layanan ini?`;
-            const whatsappUrl = `https://wa.me/${ownerWhatsApp}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+        function orderDomain() {
+            const message = `Halo! Saya tertarik untuk mendaftarkan domain. Bisakah Anda memberikan informasi harga dan proses pendaftaran domain?`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         }
 
-        // Animation on scroll
-        window.addEventListener('scroll', () => {
-            const elements = document.querySelectorAll('.product-section');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('fade-in');
-                }
+        function orderSubdomain() {
+            const message = `Halo! Saya ingin mendapatkan subdomain gratis. Bagaimana cara mendapatkannya?`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        function orderCustom() {
+            const message = `Halo! Saya memerlukan layanan custom. Bisakah kita diskusikan kebutuhan khusus saya?`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // Add fade-in animation to elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.pricing-card, .game-card, .service-description');
+            elements.forEach((el, index) => {
+                el.classList.add('fade-in');
+                el.style.animationDelay = `${index * 0.1}s`;
             });
         });
 
-        // Loading animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.pricing-card, .game-card, .service-description');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('fade-in');
-                }, index * 100);
+        // Smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
